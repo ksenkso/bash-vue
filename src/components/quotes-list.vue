@@ -21,10 +21,10 @@ export default defineComponent({
   components: { PaginationView, QuoteCard },
   props: {
     quotes: {
-      type: Array as PropType<Quote[]>,
+      type: Array as PropType<Quote[] | null>,
     },
     pagination: {
-      type: Object as PropType<Pagination>,
+      type: Object as PropType<Pagination | null>,
     },
   },
   mounted() {
