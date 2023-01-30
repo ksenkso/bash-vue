@@ -1,41 +1,31 @@
 <template>
   <pagination-view ref="pagination" v-if="pagination" :pagination="pagination"/>
-  <ul v-if="list && list.length">
+  <ul v-if="quotes && quotes.length">
     <li
-      v-for="quote in list"
+      v-for="quote in quotes"
       :key="quote.id"
     >
-      <quote-card :quote="quote" />
+      <quote-card :quote="quote"/>
     </li>
   </ul>
   <pagination-view v-if="pagination" :pagination="pagination"/>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import QuoteCard, { Quote } from '../components/quote-card.vue';
-import PaginationView, { Pagination } from '../components/pagination-view.vue';
+import { defineComponent, PropType } from 'vue';
+import PaginationView, { Pagination } from './pagination-view.vue';
+import QuoteCard, { Quote } from './quote-card.vue';
 
 export default defineComponent({
   name: 'quotes-list',
   components: { PaginationView, QuoteCard },
   props: {
-    page: {
-      type: Number,
-      required: true,
+    quotes: {
+      type: Array as PropType<Quote[]>,
     },
-  },
-  data() {
-    return {
-      isLoading: true as boolean,
-      list: null as Array<Quote> | null,
-      pagination: null as Pagination | null,
-    }
-  },
-  created() {
-    this.$watch(() => this.$route.params, () => {
-      this.getQuotes();
-    }, { immediate: true, })
+    pagination: {
+      type: Object as PropType<Pagination>,
+    },
   },
   mounted() {
     document.addEventListener('keyup', (e) => {
@@ -48,6 +38,8 @@ export default defineComponent({
   },
   methods: {
     shiftPage(shift: -1 | 1) {
+      if (!this.pagination) return;
+
       const check = shift === 1 ? 'hasNextPage' : 'hasPrevPage' as const;
       if (!(this.$refs.pagination as InstanceType<typeof PaginationView>)[check]) {
         return;
@@ -55,24 +47,14 @@ export default defineComponent({
 
       this.$router.push({
         name: 'INDEX',
-        params: { page: this.page + shift },
+        params: { page: this.pagination.page + shift },
       });
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' })
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     },
-    getQuotes() {
-      fetch(`${import.meta.env.VITE_API_URL}/quotes/page/${this.page}`)
-        .then((res) => res.json())
-        .then(({ list, pagination }) => {
-          this.list = list;
-          this.pagination = pagination;
-        })
-        .finally(() => {
-          this.isLoading = false;
-        })
-    }
-  }
+  },
 });
 </script>
+
 <style scoped>
 ul {
   list-style-type: none;

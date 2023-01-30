@@ -13,6 +13,14 @@ class Api {
     })
       .then(Api.json)
   }
+
+  search(query: string) {
+    const targetUrl = new URL(url(`/quotes/search/`));
+    targetUrl.searchParams.set('query', query);
+
+    return fetch(targetUrl.toString())
+      .then(Api.json);
+  }
 }
 
 export const api = new Api();
