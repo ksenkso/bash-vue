@@ -7,9 +7,9 @@
     <pre class="text" v-html="quote.text" />
     <div class="footer">
       <div class="rating">
-        <div class="button down"></div>
+        <div class="button down">-</div>
         <div class="value">{{quote.rating}}</div>
-        <div class="button up"></div>
+        <div class="button up">+</div>
       </div>
     </div>
   </div>
@@ -57,4 +57,8 @@ export default defineComponent({
   margin: 0;
 }
 
+.rating {
+  display: flex;
+  justify-content: space-between;
+}
 </style>
