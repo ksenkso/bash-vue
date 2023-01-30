@@ -7,9 +7,15 @@
     <pre class="text" v-html="quote.text" />
     <div class="footer">
       <div class="rating">
-        <div class="button down">-</div>
+        <button
+          class="button down"
+          @click="vote('down')"
+        >-</button>
         <div class="value">{{quote.rating}}</div>
-        <div class="button up">+</div>
+        <button
+          class="button up"
+          @click="vote('up')"
+        >+</button>
       </div>
     </div>
   </div>
@@ -17,6 +23,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+import { api, Vote } from '../api';
 
 export interface Quote {
   id: number;
@@ -33,6 +40,14 @@ export default defineComponent({
       required: true,
     },
   },
+  methods: {
+    vote(vote: Vote) {
+      api.vote(this.quote.id, vote)
+        .then(({ rating }) => {
+          this.quote.rating = rating;
+        })
+    }
+  }
 });
 </script>
 
@@ -60,5 +75,18 @@ export default defineComponent({
 .rating {
   display: flex;
   justify-content: space-between;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+.button {
+  border: none;
+  background-color: #d4d4d4;
+  border-radius: 5px;
+  width: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
 }
 </style>

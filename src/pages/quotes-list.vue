@@ -57,6 +57,7 @@ export default defineComponent({
         name: 'INDEX',
         params: { page: this.page + shift },
       });
+      window.scroll({ top: 0, left: 0, behavior: 'smooth' })
     },
     getQuotes() {
       fetch(`${import.meta.env.VITE_API_URL}/quotes/page/${this.page}`)
