@@ -15,10 +15,10 @@ class Api {
   }
 
   search(query: string) {
-    const targetUrl = new URL(url(`/quotes/search/`));
-    targetUrl.searchParams.set('query', query);
+    const params = new URLSearchParams({ query })
+    params.toString()
 
-    return fetch(targetUrl.toString())
+    return fetch(url(`/quotes/search?${params.toString()}`))
       .then(Api.json);
   }
 }
