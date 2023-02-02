@@ -56,6 +56,7 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   row-gap: 4px;
+  font-family: monospace;
 }
 
 .header {
@@ -79,6 +80,18 @@ export default defineComponent({
   margin: 0 auto;
 }
 
+.rating .value {
+  flex-basis: 200px;
+  flex-grow: 0;
+  text-align: center;
+}
+
+@media screen and (max-width: 824px) {
+  .rating {
+    max-width: none;
+  }
+}
+
 .button {
   border: none;
   background-color: #d4d4d4;
@@ -88,5 +101,11 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  flex-grow: 1;
+}
+
+.date {
+  font-size: 12px;
+  color: #333333;
 }
 </style>

@@ -2,10 +2,7 @@
   <div class="app">
     <header>
       <menu-view />
-      <div class="search">
-        <input type="search" v-model="query" @keydown.enter="search">
-        <button @click="search">search</button>
-      </div>
+      <search-form />
     </header>
     <main>
       <router-view/>
@@ -15,25 +12,20 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import MenuView from './components/menu-view.vue';
+import SearchForm from './components/search-form.vue';
 
 export default defineComponent({
   name: 'App',
-  components: { MenuView },
-  data() {
-    return {
-      query: ''
-    };
-  },
-  methods: {
-    search() {
-      this.$router.push({
-        name: 'SEARCH',
-        query: {
-          query: this.query,
-        },
-      });
-    }
-  }
+  components: { SearchForm, MenuView },
 });
 </script>
 
+<style scoped>
+.app {
+  padding: 0 12px;
+}
+
+main {
+  padding: 28px 0;
+}
+</style>

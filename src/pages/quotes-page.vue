@@ -38,7 +38,6 @@ export default defineComponent({
   methods: {
     getQuotes() {
       api.list({ page: this.page, order: this.order })
-      // fetch(`${import.meta.env.VITE_API_URL}/quotes/page/${this.page}`)
         .then((res) => res.json())
         .then(({ list, pagination }) => {
           this.list = list;

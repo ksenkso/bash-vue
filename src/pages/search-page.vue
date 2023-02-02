@@ -1,5 +1,6 @@
 <template>
-  <quotes-list :pagination="pagination" :quotes="list" />
+  <quotes-list v-if="!isLoading && list && list.length" :pagination="pagination" :quotes="list" />
+  <empty-list v-else />
 </template>
 
 <script lang="ts">
@@ -8,10 +9,11 @@ import QuotesList from '../components/quotes-list.vue';
 import { Quote } from '../components/quote-card.vue';
 import { Pagination } from '../components/pagination-view.vue';
 import { api } from '../api';
+import EmptyList from '../components/empty-list.vue';
 
 export default defineComponent({
   name: 'search-page',
-  components: { QuotesList },
+  components: { EmptyList, QuotesList },
   data() {
     return {
       isLoading: true as boolean,

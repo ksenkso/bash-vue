@@ -48,16 +48,18 @@ export default defineComponent({
       this.$router.push({
         params: { page: this.pagination.page + shift },
       });
-      window.scroll({ top: 0, left: 0, behavior: 'smooth' });
     },
   },
+  updated() {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  }
 });
 </script>
 
 <style scoped>
 ul {
   list-style-type: none;
-  padding: 0;
+  padding: 24px 0 28px;
   display: flex;
   flex-direction: column;
   row-gap: 16px;
