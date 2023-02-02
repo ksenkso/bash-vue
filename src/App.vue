@@ -1,13 +1,7 @@
 <template>
   <div class="app">
     <header>
-      <nav>
-        <ul>
-          <li>
-            <router-link to="/">Home</router-link>
-          </li>
-        </ul>
-      </nav>
+      <menu-view />
       <div class="search">
         <input type="search" v-model="query" @keydown.enter="search">
         <button @click="search">search</button>
@@ -20,9 +14,11 @@
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
+import MenuView from './components/menu-view.vue';
 
 export default defineComponent({
   name: 'App',
+  components: { MenuView },
   data() {
     return {
       query: ''
@@ -40,3 +36,4 @@ export default defineComponent({
   }
 });
 </script>
+

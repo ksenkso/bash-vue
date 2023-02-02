@@ -5,8 +5,10 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/:page?',
     name: 'INDEX',
-    component: () => import('./pages/home-page.vue'),
-    props: route => ({ page: +route.params.page || 1 }),
+    component: () => import('./pages/quotes-page.vue'),
+    props: route => ({
+      page: +route.params.page || 1,
+    }),
   },
   {
     path: '/quote/:id',
@@ -17,6 +19,18 @@ const routes: RouteRecordRaw[] = [
     path: '/search',
     name: 'SEARCH',
     component: () => import('./pages/search-page.vue'),
+  },
+  {
+    path: '/rating/:page?',
+    name: 'RATING',
+    component: () => import('./pages/quotes-page.vue'),
+    props: route => ({
+      page: +route.params.page || 1,
+      order: {
+        field: 'rating',
+        dir: 'DESC',
+      },
+    })
   }
 ];
 

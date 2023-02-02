@@ -3,10 +3,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, PropType } from 'vue';
 import { Quote } from '../components/quote-card.vue';
 import { Pagination } from '../components/pagination-view.vue';
 import QuotesList from '../components/quotes-list.vue';
+import { Order } from '../types';
+import { api } from '../api';
 
 export default defineComponent({
   name: 'home-page',
@@ -16,6 +18,10 @@ export default defineComponent({
       type: Number,
       required: true,
     },
+    order: {
+      type: Object as PropType<Order>,
+      default: () => ({ field: 'id', dir: 'ASC' }),
+    }
   },
   data() {
     return {
@@ -31,7 +37,8 @@ export default defineComponent({
   },
   methods: {
     getQuotes() {
-      fetch(`${import.meta.env.VITE_API_URL}/quotes/page/${this.page}`)
+      api.list({ page: this.page, order: this.order })
+      // fetch(`${import.meta.env.VITE_API_URL}/quotes/page/${this.page}`)
         .then((res) => res.json())
         .then(({ list, pagination }) => {
           this.list = list;
