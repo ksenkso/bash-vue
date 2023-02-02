@@ -1,5 +1,5 @@
 <template>
-  <quotes-list :pagination="pagination" :quotes="list" />
+  <quotes-list :pagination="pagination" :quotes="list" :is-loading="isLoading" />
 </template>
 
 <script lang="ts">
@@ -37,9 +37,13 @@ export default defineComponent({
   },
   methods: {
     getQuotes() {
+      const loading = setTimeout(() => {
+        this.isLoading = true;
+      }, 500);
       api.list({ page: this.page, order: this.order })
         .then((res) => res.json())
         .then(({ list, pagination }) => {
+          clearTimeout(loading);
           this.list = list;
           this.pagination = pagination;
         })

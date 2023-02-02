@@ -1,6 +1,5 @@
 <template>
-  <quotes-list v-if="!isLoading && list && list.length" :pagination="pagination" :quotes="list" />
-  <empty-list v-else />
+  <quotes-list :pagination="pagination" :quotes="list" :is-loading="isLoading" />
 </template>
 
 <script lang="ts">

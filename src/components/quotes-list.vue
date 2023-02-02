@@ -1,6 +1,7 @@
 <template>
   <pagination-view ref="pagination" v-if="pagination" :pagination="pagination"/>
-  <ul v-if="quotes && quotes.length">
+  <quotes-placeholder v-if="isLoading" />
+  <ul v-else-if="quotes && quotes.length">
     <li
       v-for="quote in quotes"
       :key="quote.id"
@@ -8,6 +9,7 @@
       <quote-card :quote="quote"/>
     </li>
   </ul>
+  <empty-list v-else />
   <pagination-view v-if="pagination" :pagination="pagination"/>
 </template>
 
@@ -15,10 +17,12 @@
 import { defineComponent, PropType } from 'vue';
 import PaginationView, { Pagination } from './pagination-view.vue';
 import QuoteCard, { Quote } from './quote-card.vue';
+import QuotesPlaceholder from './quotes-placeholder.vue';
+import EmptyList from './empty-list.vue';
 
 export default defineComponent({
   name: 'quotes-list',
-  components: { PaginationView, QuoteCard },
+  components: { EmptyList, QuotesPlaceholder, PaginationView, QuoteCard },
   props: {
     quotes: {
       type: Array as PropType<Quote[] | null>,
@@ -26,9 +30,13 @@ export default defineComponent({
     pagination: {
       type: Object as PropType<Pagination | null>,
     },
+    isLoading: {
+      type: Boolean,
+    },
   },
   mounted() {
     document.addEventListener('keyup', (e) => {
+      console.count('keyup')
       if (e.key === 'ArrowRight') {
         this.shiftPage(1);
       } else if (e.key === 'ArrowLeft') {
@@ -38,6 +46,7 @@ export default defineComponent({
   },
   methods: {
     shiftPage(shift: -1 | 1) {
+      console.count('shiftPage');
       if (!this.pagination) return;
 
       const check = shift === 1 ? 'hasNextPage' : 'hasPrevPage' as const;
@@ -45,6 +54,7 @@ export default defineComponent({
         return;
       }
 
+      console.count('push');
       this.$router.push({
         params: { page: this.pagination.page + shift },
       });
@@ -64,6 +74,6 @@ ul {
   flex-direction: column;
   row-gap: 16px;
   max-width: 800px;
-  margin: 0;
+  margin: 0 auto;
 }
 </style>
