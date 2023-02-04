@@ -12,6 +12,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/quote/:id',
+    name: 'QUOTE',
     component: () => import('./pages/quote-page.vue'),
     props: true,
   },

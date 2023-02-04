@@ -10,7 +10,11 @@
       v-for="quote in quotes"
       :key="quote.id"
     >
-      <quote-card :quote="quote" />
+      <quote-card
+        :quote="quote"
+        :copied="copiedQuoteLinkId === quote.id"
+        @copy-link="copyLink(quote.id)"
+      />
     </li>
   </ul>
   <empty-list v-else />
@@ -28,6 +32,9 @@ import PaginationView, { Pagination } from './pagination-view.vue';
 import QuoteCard, { Quote } from './quote-card.vue';
 import QuotesPlaceholder from './quotes-placeholder.vue';
 
+type Data = {
+  copiedQuoteLinkId: number | null;
+}
 export default defineComponent({
   name: 'QuotesList',
   components: { EmptyList, QuotesPlaceholder, PaginationView, QuoteCard },
@@ -41,6 +48,11 @@ export default defineComponent({
     isLoading: {
       type: Boolean,
     },
+  },
+  data() {
+    return {
+      copiedQuoteLinkId: null,
+    } as Data
   },
   mounted() {
     document.addEventListener('keyup', (e) => {
@@ -69,6 +81,11 @@ export default defineComponent({
       this.$router.push({
         params: { page: this.pagination.page + shift },
       });
+    },
+    copyLink(id: number) {
+      const link = this.$router.resolve({ name: 'QUOTE', params: { id } }).href;
+      navigator.clipboard.writeText(new URL(link, window.location.origin).toString());
+      this.copiedQuoteLinkId = id;
     },
   }
 });

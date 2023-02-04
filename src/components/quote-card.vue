@@ -1,12 +1,21 @@
 <template>
   <div class="quote">
     <div class="header">
-      <router-link
-        class="id"
-        :to="{ path: `/quote/${quote.id}` }"
-      >
-        #{{ quote.id }}
-      </router-link>
+      <div class="link">
+        <router-link
+          class="id"
+          :to="{ path: `/quote/${quote.id}` }"
+        >
+          #{{ quote.id }}
+        </router-link>
+        <button
+          class="copy-link"
+          @click="$emit('copy-link')"
+        >
+          {{ copyLinkIcon }}
+        </button>
+      </div>
+
       <div class="date">{{ quote.date }}</div>
     </div>
     <pre
@@ -52,7 +61,9 @@ export default defineComponent({
       type: Object as PropType<Quote>,
       required: true,
     },
+    copied: Boolean,
   },
+  emits: ['copy-link'],
   computed: {
     cleanText() {
       const index = this.quote.text.indexOf('<div class="quote__strips"');
@@ -62,6 +73,9 @@ export default defineComponent({
 
       return this.quote.text.substring(0, index).trim();
     },
+    copyLinkIcon() {
+      return this.copied ? '✨' : '🔗';
+    },
   },
   methods: {
     vote(vote: Vote) {
@@ -70,6 +84,7 @@ export default defineComponent({
         this.quote.rating = rating;
       });
     },
+
   },
 });
 </script>
@@ -127,10 +142,31 @@ export default defineComponent({
   justify-content: center;
   cursor: pointer;
   flex-grow: 1;
+  transition: background-color .1s ease-in-out;
+}
+
+.button:active {
+  background-color: #7a7a7a;
 }
 
 .date {
   font-size: 12px;
   color: #333333;
+}
+
+.link {
+  display: flex;
+  column-gap: 8px;
+}
+
+.copy-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  height: 24px;
+  width: 24px;
+  cursor: pointer;
+  background-color: #ffffff;
 }
 </style>
