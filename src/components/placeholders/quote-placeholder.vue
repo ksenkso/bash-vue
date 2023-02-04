@@ -1,34 +1,21 @@
 <template>
-  <ul>
-    <li
-      v-for="index in 25"
-      :key="index"
-    >
-      <div class="quote">
-        <div class="header">
-          <div class="id" />
-          <div class="date" />
-        </div>
-        <div class="text" />
-        <div class="footer" />
-      </div>
-    </li>
-  </ul>
+  <div class="quote">
+    <div class="header">
+      <div class="id" />
+      <div class="date" />
+    </div>
+    <div class="text" />
+    <div class="footer" />
+  </div>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
-  name: 'QuotesPlaceholder',
-});
+<script>
+export default {
+  name: 'QuotePlaceholder'
+}
 </script>
 
 <style scoped>
-ul {
-  list-style-type: none;
-  padding: 0;
-}
 
 .quote {
   width: 100%;

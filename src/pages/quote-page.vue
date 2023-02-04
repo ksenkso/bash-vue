@@ -1,24 +1,18 @@
 <template>
-  <div
-    v-if="isLoading"
-    class="loader"
-  >
-    Loading...
-  </div>
-  <quote-card
-    v-if="quote"
-    :quote="quote"
+  <quotes-list
+    :is-loading="isLoading"
+    :quotes="quote ? [quote] : null"
   />
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import {defineComponent} from 'vue';
 
-import QuoteCard from '../components/quote-card.vue';
+import QuotesList from '../components/quotes-list.vue';
 
 export default defineComponent({
   name: 'QuotePage',
-  components: { QuoteCard },
+  components: {QuotesList },
   props: {
     id: {
       type: Number,

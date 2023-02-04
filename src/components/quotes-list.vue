@@ -29,8 +29,8 @@ import { defineComponent, PropType } from 'vue';
 
 import EmptyList from './empty-list.vue';
 import PaginationView, { Pagination } from './pagination-view.vue';
+import QuotesPlaceholder from './placeholders/quotes-placeholder.vue';
 import QuoteCard, { Quote } from './quote-card.vue';
-import QuotesPlaceholder from './quotes-placeholder.vue';
 
 type Data = {
   copiedQuoteLinkId: number | null;
