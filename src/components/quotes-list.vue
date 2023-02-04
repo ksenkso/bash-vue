@@ -1,27 +1,35 @@
 <template>
-  <pagination-view ref="pagination" v-if="pagination" :pagination="pagination"/>
+  <pagination-view
+    v-if="pagination"
+    ref="pagination"
+    :pagination="pagination"
+  />
   <quotes-placeholder v-if="isLoading" />
   <ul v-else-if="quotes && quotes.length">
     <li
       v-for="quote in quotes"
       :key="quote.id"
     >
-      <quote-card :quote="quote"/>
+      <quote-card :quote="quote" />
     </li>
   </ul>
   <empty-list v-else />
-  <pagination-view v-if="pagination" :pagination="pagination"/>
+  <pagination-view
+    v-if="pagination"
+    :pagination="pagination"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+
+import EmptyList from './empty-list.vue';
 import PaginationView, { Pagination } from './pagination-view.vue';
 import QuoteCard, { Quote } from './quote-card.vue';
 import QuotesPlaceholder from './quotes-placeholder.vue';
-import EmptyList from './empty-list.vue';
 
 export default defineComponent({
-  name: 'quotes-list',
+  name: 'QuotesList',
   components: { EmptyList, QuotesPlaceholder, PaginationView, QuoteCard },
   props: {
     quotes: {
@@ -44,6 +52,9 @@ export default defineComponent({
       }
     });
   },
+  updated() {
+    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
+  },
   methods: {
     shiftPage(shift: -1 | 1) {
       console.count('shiftPage');
@@ -59,9 +70,6 @@ export default defineComponent({
         params: { page: this.pagination.page + shift },
       });
     },
-  },
-  updated() {
-    window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   }
 });
 </script>

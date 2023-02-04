@@ -10,6 +10,13 @@
   -webkit-text-size-adjust: 100%;
 }
 
+@font-face {
+  src: url("/JetBrainsMono-Regular.woff2") format("woff");
+  font-family: bash-monospace;
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   margin: 0;
   min-width: 320px;

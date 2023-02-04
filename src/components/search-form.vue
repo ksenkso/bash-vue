@@ -2,8 +2,17 @@
   <div class="search">
     <div class="title">Поиск: </div>
     <div class="container">
-      <input type="search" v-model="query" @keydown.enter="search">
-      <button @click="search" title="Поиск">🔍</button>
+      <input
+        v-model="query"
+        type="search"
+        @keydown.enter="search"
+      >
+      <button
+        title="Поиск"
+        @click="search"
+      >
+        🔍
+      </button>
     </div>
   </div>
 </template>
@@ -12,7 +21,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'search-form',
+  name: 'SearchForm',
   data() {
     return {
       query: ''

@@ -5,12 +5,13 @@
       <search-form />
     </header>
     <main>
-      <router-view/>
+      <router-view />
     </main>
   </div>
 </template>
 <script lang="ts">
 import { defineComponent } from 'vue';
+
 import MenuView from './components/menu-view.vue';
 import SearchForm from './components/search-form.vue';
 

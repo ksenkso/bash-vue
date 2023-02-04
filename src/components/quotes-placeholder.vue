@@ -1,13 +1,16 @@
 <template>
   <ul>
-    <li v-for="index in 25">
+    <li
+      v-for="index in 25"
+      :key="index"
+    >
       <div class="quote">
         <div class="header">
-          <div class="id"></div>
-          <div class="date"></div>
+          <div class="id" />
+          <div class="date" />
         </div>
-        <div class="text"></div>
-        <div class="footer"></div>
+        <div class="text" />
+        <div class="footer" />
       </div>
     </li>
   </ul>
@@ -17,7 +20,7 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'quotes-placeholder',
+  name: 'QuotesPlaceholder',
 });
 </script>
 

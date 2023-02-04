@@ -1,21 +1,33 @@
 <template>
   <div class="quote">
     <div class="header">
-      <router-link class="id" :to="{ path: `/quote/${quote.id}` }">#{{quote.id}}</router-link>
-      <div class="date">{{quote.date}}</div>
+      <router-link
+        class="id"
+        :to="{ path: `/quote/${quote.id}` }"
+      >
+        #{{ quote.id }}
+      </router-link>
+      <div class="date">{{ quote.date }}</div>
     </div>
-    <pre class="text" v-html="quote.text" />
+    <pre
+      class="text"
+      v-html="cleanText"
+    />
     <div class="footer">
       <div class="rating">
         <button
           class="button down"
           @click="vote('down')"
-        >-</button>
-        <div class="value">{{quote.rating}}</div>
+        >
+          -
+        </button>
+        <div class="value">{{ quote.rating }}</div>
         <button
           class="button up"
           @click="vote('up')"
-        >+</button>
+        >
+          +
+        </button>
       </div>
     </div>
   </div>
@@ -23,6 +35,7 @@
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
+
 import { api, Vote } from '../api';
 
 export interface Quote {
@@ -33,21 +46,31 @@ export interface Quote {
 }
 
 export default defineComponent({
-  name: 'quote-card',
+  name: 'QuoteCard',
   props: {
     quote: {
       type: Object as PropType<Quote>,
       required: true,
     },
   },
+  computed: {
+    cleanText() {
+      const index = this.quote.text.indexOf('<div class="quote__strips"');
+      if (index === -1) {
+        return this.quote.text;
+      }
+
+      return this.quote.text.substring(0, index).trim();
+    },
+  },
   methods: {
     vote(vote: Vote) {
-      api.vote(this.quote.id, vote)
-        .then(({ rating }) => {
-          this.quote.rating = rating;
-        })
-    }
-  }
+      api.vote(this.quote.id, vote).then(({ rating }) => {
+        // eslint-disable-next-line vue/no-mutating-props
+        this.quote.rating = rating;
+      });
+    },
+  },
 });
 </script>
 
@@ -56,7 +79,8 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   row-gap: 4px;
-  font-family: monospace;
+  font-family: bash-monospace, monospace;
+  font-weight: normal;
 }
 
 .header {
@@ -70,6 +94,7 @@ export default defineComponent({
   background-color: #d4d4d4;
   border-radius: 5px;
   white-space: pre-wrap;
+  font-family: bash-monospace, monospace;
   margin: 0;
 }
 

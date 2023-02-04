@@ -1,17 +1,22 @@
 <template>
-  <quotes-list :pagination="pagination" :quotes="list" :is-loading="isLoading" />
+  <quotes-list
+    :pagination="pagination"
+    :quotes="list"
+    :is-loading="isLoading"
+  />
 </template>
 
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
-import { Quote } from '../components/quote-card.vue';
+
+import { api } from '../api';
 import { Pagination } from '../components/pagination-view.vue';
+import { Quote } from '../components/quote-card.vue';
 import QuotesList from '../components/quotes-list.vue';
 import { Order } from '../types';
-import { api } from '../api';
 
 export default defineComponent({
-  name: 'home-page',
+  name: 'HomePage',
   components: { QuotesList },
   props: {
     page: {

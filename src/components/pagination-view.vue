@@ -1,10 +1,34 @@
 <template>
   <div class="pagination">
-    <router-link class="page first" v-if="firstPage" :to="firstPage">{{ '<<' }}</router-link>
-    <router-link class="page" v-if="prevPage" :to="prevPage">{{ prevPage.params.page }}</router-link>
+    <router-link
+      v-if="firstPage"
+      class="page first"
+      :to="firstPage"
+    >
+      {{ '<<' }}
+    </router-link>
+    <router-link
+      v-if="prevPage"
+      class="page"
+      :to="prevPage"
+    >
+      {{ prevPage.params.page }}
+    </router-link>
     <div class="page current">{{ pagination.page }}</div>
-    <router-link class="page" v-if="nextPage" :to="nextPage">{{ nextPage.params.page }}</router-link>
-    <router-link class="page last" v-if="lastPage" :to="lastPage">{{ '>>' }}</router-link>
+    <router-link
+      v-if="nextPage"
+      class="page"
+      :to="nextPage"
+    >
+      {{ nextPage.params.page }}
+    </router-link>
+    <router-link
+      v-if="lastPage"
+      class="page last"
+      :to="lastPage"
+    >
+      {{ '>>' }}
+    </router-link>
   </div>
 </template>
 
@@ -19,7 +43,7 @@ export interface Pagination {
 }
 
 export default defineComponent({
-  name: 'pagination-view',
+  name: 'PaginationView',
   props: {
     pagination: {
       type: Object as PropType<Pagination>,
@@ -51,7 +75,6 @@ export default defineComponent({
       }
 
       return {
-        name: 'INDEX',
         params: {
           page: this.pagination.page - 1,
         }
@@ -63,7 +86,6 @@ export default defineComponent({
       }
 
       return {
-        name: 'INDEX',
         params: {
           page: this.pagination.page + 1,
         }
