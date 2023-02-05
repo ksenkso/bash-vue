@@ -1,4 +1,5 @@
 <template>
+  <search-form />
   <quotes-list
     :pagination="pagination"
     :quotes="list"
@@ -11,10 +12,11 @@ import { defineComponent, PropType } from 'vue';
 
 import {api, Order, Pagination, Quote} from '../api';
 import QuotesList from '../components/quotes-list.vue';
+import SearchForm from '../App.vue';
 
 export default defineComponent({
   name: 'HomePage',
-  components: { QuotesList },
+  components: { SearchForm, QuotesList },
   props: {
     page: {
       type: Number,

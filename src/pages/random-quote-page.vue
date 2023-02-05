@@ -1,19 +1,16 @@
 <template>
   <div class="page">
-    <div class="form">
-      <input
-        id="min-rating"
-        v-model="minRating"
-        type="number"
-        name="min-rating"
-      >
-      <button
-        class="reload"
-        @click="getRandomQuote"
-      >
-        reload
-      </button>
-    </div>
+    <container-view>
+      <div class="form">
+        <rating-form v-model="minRating" />
+        <button-view
+          class="button"
+          @click="getRandomQuote"
+        >
+          ↻
+        </button-view>
+      </div>
+    </container-view>
     <quotes-list
       :is-loading="isLoading"
       :quotes="quote ? [quote] : null"
@@ -27,10 +24,13 @@ import { defineComponent } from 'vue';
 
 import {api, Quote} from '../api';
 import QuotesList from '../components/quotes-list.vue';
+import RatingForm from '../components/rating-form.vue';
+import ContainerView from '../components/container-view.vue';
+import ButtonView from '../components/button-view.vue';
 
 export default defineComponent({
   name: 'RandomQuotePage',
-  components: {QuotesList},
+  components: { ButtonView, ContainerView, RatingForm, QuotesList},
   data() {
     return {
       isLoading: false,
@@ -75,7 +75,16 @@ export default defineComponent({
   align-items: center;
 }
 
-input {
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: 8px;
+}
 
+.form .button {
+  flex-grow: 0;
+  width: 40px;
+  height: 28px;
 }
 </style>

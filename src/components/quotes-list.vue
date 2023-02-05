@@ -1,30 +1,32 @@
 <template>
-  <pagination-view
-    v-if="pagination"
-    ref="pagination"
-    :pagination="pagination"
-  />
-  <quotes-placeholder v-if="isLoading" />
-  <ul v-else-if="quotes && quotes.length">
-    <li
-      v-for="quote in quotes"
-      :key="quote.id"
-    >
-      <quote-card
-        :quote="quote"
-        :copied="copiedQuoteLinkId === quote.id"
-        @copy-link="copyLink(quote.id)"
-      />
-    </li>
-  </ul>
-  <empty-list
-    v-else
-    :message="emptyListMessage"
-  />
-  <pagination-view
-    v-if="pagination"
-    :pagination="pagination"
-  />
+  <container-view>
+    <pagination-view
+      v-if="pagination"
+      ref="pagination"
+      :pagination="pagination"
+    />
+    <quotes-placeholder v-if="isLoading" />
+    <ul v-else-if="quotes && quotes.length">
+      <li
+        v-for="quote in quotes"
+        :key="quote.id"
+      >
+        <quote-card
+          :quote="quote"
+          :copied="copiedQuoteLinkId === quote.id"
+          @copy-link="copyLink(quote.id)"
+        />
+      </li>
+    </ul>
+    <empty-list
+      v-else
+      :message="emptyListMessage"
+    />
+    <pagination-view
+      v-if="pagination"
+      :pagination="pagination"
+    />
+  </container-view>
 </template>
 
 <script lang="ts">
@@ -35,13 +37,14 @@ import EmptyList from './empty-list.vue';
 import PaginationView from './pagination-view.vue';
 import QuotesPlaceholder from './placeholders/quotes-placeholder.vue';
 import QuoteCard from './quote-card.vue';
+import ContainerView from './container-view.vue';
 
 type Data = {
   copiedQuoteLinkId: number | null;
 }
 export default defineComponent({
   name: 'QuotesList',
-  components: { EmptyList, QuotesPlaceholder, PaginationView, QuoteCard },
+  components: { ContainerView, EmptyList, QuotesPlaceholder, PaginationView, QuoteCard },
   props: {
     quotes: {
       type: Array as PropType<Quote[] | null>,
@@ -105,8 +108,5 @@ ul {
   display: flex;
   flex-direction: column;
   row-gap: 16px;
-  max-width: 800px;
-  margin: 0 auto;
-  width: 100%;
 }
 </style>

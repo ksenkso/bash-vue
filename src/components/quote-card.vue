@@ -24,19 +24,13 @@
     />
     <div class="footer">
       <div class="rating">
-        <button
-          class="button down"
-          @click="vote('down')"
-        >
+        <button-view @click="vote('down')">
           -
-        </button>
+        </button-view>
         <div class="value">{{ quote.rating }}</div>
-        <button
-          class="button up"
-          @click="vote('up')"
-        >
+        <button-view @click="vote('up')">
           +
-        </button>
+        </button-view>
       </div>
     </div>
   </div>
@@ -46,9 +40,11 @@
 import { defineComponent, PropType } from 'vue';
 
 import {api, Quote, Vote} from '../api';
+import ButtonView from './button-view.vue';
 
 export default defineComponent({
   name: 'QuoteCard',
+  components: { ButtonView },
   props: {
     quote: {
       type: Object as PropType<Quote>,
@@ -125,23 +121,6 @@ export default defineComponent({
   }
 }
 
-.button {
-  border: none;
-  background-color: #d4d4d4;
-  border-radius: 5px;
-  width: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  flex-grow: 1;
-  transition: background-color .1s ease-in-out;
-}
-
-.button:active {
-  background-color: #7a7a7a;
-}
-
 .date {
   font-size: 12px;
   color: #333333;
@@ -161,5 +140,6 @@ export default defineComponent({
   width: 24px;
   cursor: pointer;
   background-color: #ffffff;
+  border: none;
 }
 </style>

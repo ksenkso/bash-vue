@@ -2,7 +2,6 @@
   <div class="app">
     <header>
       <menu-view />
-      <search-form />
     </header>
     <main>
       <router-view />

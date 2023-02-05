@@ -1,18 +1,12 @@
 <template>
   <div class="search">
-    <div class="title">Поиск: </div>
+    <div class="title">Рейтинг >= </div>
     <div class="container">
       <input
-        v-model="query"
-        type="search"
-        @keydown.enter="search"
+        v-model="value"
+        type="number"
+        @keydown.enter="submit"
       >
-      <button
-        title="Поиск"
-        @click="search"
-      >
-        🔍
-      </button>
     </div>
   </div>
 </template>
@@ -21,22 +15,28 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  name: 'SearchForm',
-  data() {
-    return {
-      query: ''
-    };
+  name: 'RatingForm',
+  props: {
+    modelValue: {
+      type: Number,
+      default: null,
+    },
+  },
+  computed: {
+    value: {
+      get() {
+        return this.modelValue;
+      },
+      set(value: number) {
+        this.$emit('update:modelValue', value);
+      }
+    }
   },
   methods: {
-    search() {
-      this.$router.push({
-        name: 'SEARCH',
-        query: {
-          query: this.query,
-        },
-      });
-    }
-  }
+    submit() {
+      this.$emit('submit');
+    },
+  },
 });
 </script>
 
