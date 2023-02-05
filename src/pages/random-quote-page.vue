@@ -48,14 +48,24 @@ export default defineComponent({
   created() {
     this.getRandomQuote();
   },
+  mounted() {
+    document.addEventListener('keyup', this.hotkeysHandler);
+  },
+  beforeUnmount() {
+    document.removeEventListener('keyup', this.hotkeysHandler);
+  },
   methods: {
+    hotkeysHandler(event: KeyboardEvent) {
+      if (event.code === 'KeyR') {
+        this.getRandomQuote();
+      }
+    },
     getRandomQuote() {
       const loading = setTimeout(() => {
         this.isLoading = true;
       }, 500);
       api.random({ minRating: this.minRating })
           .then((quote: Quote) => {
-            console.log('quote', quote)
             clearTimeout(loading);
             this.quote = quote;
           })

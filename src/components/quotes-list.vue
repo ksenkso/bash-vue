@@ -65,21 +65,23 @@ export default defineComponent({
     } as Data
   },
   mounted() {
-    document.addEventListener('keyup', (e) => {
-      console.count('keyup')
-      if (e.key === 'ArrowRight') {
-        this.shiftPage(1);
-      } else if (e.key === 'ArrowLeft') {
-        this.shiftPage(-1);
-      }
-    });
+    document.addEventListener('keyup', this.hotkeysHandler);
+  },
+  beforeUnmount() {
+    document.removeEventListener('keyup', this.hotkeysHandler);
   },
   updated() {
     window.scroll({ top: 0, left: 0, behavior: 'smooth' });
   },
   methods: {
+    hotkeysHandler(e: KeyboardEvent) {
+      if (e.key === 'ArrowRight') {
+        this.shiftPage(1);
+      } else if (e.key === 'ArrowLeft') {
+        this.shiftPage(-1);
+      }
+    },
     shiftPage(shift: -1 | 1) {
-      console.count('shiftPage');
       if (!this.pagination) return;
 
       const check = shift === 1 ? 'hasNextPage' : 'hasPrevPage' as const;
@@ -87,7 +89,6 @@ export default defineComponent({
         return;
       }
 
-      console.count('push');
       this.$router.push({
         params: { page: this.pagination.page + shift },
       });
