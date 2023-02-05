@@ -1,6 +1,6 @@
 <template>
   <div class="empty-list">
-    Этот список цитат пуст
+    {{ message }}
   </div>
 </template>
 
@@ -9,6 +9,12 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'EmptyList',
+  props: {
+    message: {
+      type: String,
+      default: 'Этот список цитат пуст',
+    },
+  },
 });
 </script>
 

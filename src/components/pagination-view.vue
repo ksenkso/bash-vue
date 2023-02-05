@@ -35,12 +35,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-export interface Pagination {
-  page: number;
-  perPage: number;
-  total: number;
-  totalPages: number;
-}
+import {Pagination} from '../api';
 
 export default defineComponent({
   name: 'PaginationView',

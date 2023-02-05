@@ -7,6 +7,9 @@
       <li>
         <router-link :to="{ name: 'RATING' }">Топ</router-link>
       </li>
+      <li>
+        <router-link :to="{ name: 'RANDOM' }">Рандом</router-link>
+      </li>
     </ul>
   </nav>
 </template>

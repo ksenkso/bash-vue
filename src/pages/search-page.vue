@@ -9,9 +9,7 @@
 <script lang="ts">
 import {defineComponent} from 'vue';
 
-import {api} from '../api';
-import {Pagination} from '../components/pagination-view.vue';
-import {Quote} from '../components/quote-card.vue';
+import {api, Pagination, Quote} from '../api';
 import QuotesList from '../components/quotes-list.vue';
 
 export default defineComponent({

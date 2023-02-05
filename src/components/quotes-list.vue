@@ -17,7 +17,10 @@
       />
     </li>
   </ul>
-  <empty-list v-else />
+  <empty-list
+    v-else
+    :message="emptyListMessage"
+  />
   <pagination-view
     v-if="pagination"
     :pagination="pagination"
@@ -27,10 +30,11 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
+import {Pagination, Quote} from '../api';
 import EmptyList from './empty-list.vue';
-import PaginationView, { Pagination } from './pagination-view.vue';
+import PaginationView from './pagination-view.vue';
 import QuotesPlaceholder from './placeholders/quotes-placeholder.vue';
-import QuoteCard, { Quote } from './quote-card.vue';
+import QuoteCard from './quote-card.vue';
 
 type Data = {
   copiedQuoteLinkId: number | null;
@@ -47,6 +51,9 @@ export default defineComponent({
     },
     isLoading: {
       type: Boolean,
+    },
+    emptyListMessage: {
+      type: String,
     },
   },
   data() {
@@ -100,5 +107,6 @@ ul {
   row-gap: 16px;
   max-width: 800px;
   margin: 0 auto;
+  width: 100%;
 }
 </style>

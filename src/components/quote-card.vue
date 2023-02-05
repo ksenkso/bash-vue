@@ -45,14 +45,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-import { api, Vote } from '../api';
-
-export interface Quote {
-  id: number;
-  text: string;
-  rating: number;
-  date: string;
-}
+import {api, Quote, Vote} from '../api';
 
 export default defineComponent({
   name: 'QuoteCard',

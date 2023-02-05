@@ -32,6 +32,11 @@ const routes: RouteRecordRaw[] = [
         dir: 'DESC',
       },
     })
+  },
+  {
+    path: '/random',
+    name: 'RANDOM',
+    component: () => import('./pages/random-quote-page.vue')
   }
 ];
 
