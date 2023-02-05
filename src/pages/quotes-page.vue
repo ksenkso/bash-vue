@@ -1,10 +1,12 @@
 <template>
-  <search-form />
-  <quotes-list
-    :pagination="pagination"
-    :quotes="list"
-    :is-loading="isLoading"
-  />
+  <div class="page">
+    <search-form />
+    <quotes-list
+      :pagination="pagination"
+      :quotes="list"
+      :is-loading="isLoading"
+    />
+  </div>
 </template>
 
 <script lang="ts">
@@ -12,7 +14,7 @@ import { defineComponent, PropType } from 'vue';
 
 import {api, Order, Pagination, Quote} from '../api';
 import QuotesList from '../components/quotes-list.vue';
-import SearchForm from '../App.vue';
+import SearchForm from '../components/search-form.vue';
 
 export default defineComponent({
   name: 'HomePage',
@@ -57,4 +59,10 @@ export default defineComponent({
   }
 });
 </script>
-
+<style scoped>
+.page {
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+}
+</style>

@@ -104,7 +104,7 @@ export default defineComponent({
 <style scoped>
 ul {
   list-style-type: none;
-  padding: 24px 0 28px;
+  padding: 0;
   display: flex;
   flex-direction: column;
   row-gap: 16px;
