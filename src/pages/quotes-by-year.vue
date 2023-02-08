@@ -1,11 +1,13 @@
 <template>
   <div class="page">
-    <div class="year-input">
-      <div class="year-label">
-        Год: <input class="year" v-model="year" type="number" :min="minYear" :max="maxYear" @change="onYearChange">
+    <container-view>
+      <div class="year-input">
+        <div class="year-label">
+          Год: <input class="year" v-model="year" type="number" :min="minYear" :max="maxYear" @change="onYearChange">
+        </div>
+        <input class="year-slider" type="range" step="1" :min="minYear" :max="maxYear" v-model.number="year" @change="onYearChange">
       </div>
-      <input class="year-slider" type="range" step="1" :min="minYear" :max="maxYear" v-model.number="year" @change="onYearChange">
-    </div>
+    </container-view>
     <quotes-list
       :pagination="pagination"
       :quotes="list"
@@ -21,6 +23,7 @@ import { ListParams, ListProvider, Pagination, Quote, YearParam } from '../api';
 import QuotesList from '../components/quotes-list.vue';
 import SearchForm from '../components/search-form.vue';
 import PaginationView from '../components/pagination-view.vue';
+import ContainerView from '../components/container-view.vue';
 
 function resolveYear(year: YearParam | undefined, min: number, max: number) {
   if (!year) return min;
@@ -38,7 +41,7 @@ function resolveYear(year: YearParam | undefined, min: number, max: number) {
 
 export default defineComponent({
   name: 'QuotesByYear',
-  components: { PaginationView, SearchForm, QuotesList },
+  components: { ContainerView, PaginationView, SearchForm, QuotesList },
   props: {
     params: {
       type: Object as PropType<ListParams>,
