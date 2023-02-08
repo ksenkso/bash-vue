@@ -1,9 +1,10 @@
 <template>
   <div class="page">
-    <search-form />
     <div class="year-input">
-      <input class="year-slider" type="range" step="1" min="2004" max="2022" v-model.number="year" @change="onYearChange">
-      <div class="year">{{year}}</div>
+      <div class="year-label">
+        Год: <input class="year" v-model="year" type="number" :min="minYear" :max="maxYear" @change="onYearChange">
+      </div>
+      <input class="year-slider" type="range" step="1" :min="minYear" :max="maxYear" v-model.number="year" @change="onYearChange">
     </div>
     <quotes-list
       :pagination="pagination"
@@ -148,6 +149,14 @@ export default defineComponent({
   background-color: #d4d4d4;
   border-radius: 4px;
   font-family: bash-monospace, monospace;
-  margin-top: 16px;
+  border: none;
+  min-width: auto;
+}
+
+.year-label {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  column-gap: 8px;
 }
 </style>

@@ -1,6 +1,5 @@
 <template>
   <div class="search">
-    <div class="title">Поиск: </div>
     <div class="container">
       <input
         v-model="query"
