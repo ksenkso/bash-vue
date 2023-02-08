@@ -44,11 +44,14 @@ const routes: RouteRecordRaw[] = [
     name: 'RATING',
     component: () => import('./pages/quotes-page.vue'),
     props: route => ({
-      page: +route.params.page || 1,
-      order: {
-        field: 'rating',
-        dir: 'DESC',
+      params: {
+        page: +route.params.page || 1,
+        order: {
+          field: 'rating',
+          dir: 'DESC',
+        },
       },
+      provider: api.list.bind(api),
     })
   },
   {
