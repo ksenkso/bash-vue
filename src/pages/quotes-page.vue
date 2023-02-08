@@ -1,6 +1,5 @@
 <template>
   <div class="page">
-    <search-form />
     <quotes-list
       :pagination="pagination"
       :quotes="list"
