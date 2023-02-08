@@ -1,13 +1,31 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
+import { api } from './api';
 
 
 const routes: RouteRecordRaw[] = [
+  {
+    path: '/year/:year/:page?',
+    name: 'YEAR',
+    component: () => import('./pages/quotes-by-year.vue'),
+    props: route => ({
+      params: {
+        page: +route.params.page || 1,
+        year: route.params.year,
+      },
+      provider: api.listByYear.bind(api),
+      minYear: 2004,
+      maxYear: 2022,
+    }),
+  },
   {
     path: '/:page?',
     name: 'INDEX',
     component: () => import('./pages/quotes-page.vue'),
     props: route => ({
-      page: +route.params.page || 1,
+      params: {
+        page: +route.params.page || 1,
+      },
+      provider: api.list.bind(api),
     }),
   },
   {

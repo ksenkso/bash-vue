@@ -12,7 +12,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue';
 
-import {api, Order, Pagination, Quote} from '../api';
+import { ListParams, ListProvider, Pagination, Quote } from '../api';
 import QuotesList from '../components/quotes-list.vue';
 import SearchForm from '../components/search-form.vue';
 
@@ -20,14 +20,17 @@ export default defineComponent({
   name: 'HomePage',
   components: { SearchForm, QuotesList },
   props: {
-    page: {
-      type: Number,
+    params: {
+      type: Object as PropType<ListParams>,
+      default: () => ({
+        page: 1,
+        order: { field: 'id', dir: 'ASC' },
+      })
+    },
+    provider: {
+      type: Function as PropType<ListProvider>,
       required: true,
     },
-    order: {
-      type: Object as PropType<Order>,
-      default: () => ({ field: 'id', dir: 'ASC' }),
-    }
   },
   data() {
     return {
@@ -46,7 +49,7 @@ export default defineComponent({
       const loading = setTimeout(() => {
         this.isLoading = true;
       }, 500);
-      api.list({ page: this.page, order: this.order })
+      this.provider(this.params)
         .then(({ list, pagination }) => {
           clearTimeout(loading);
           this.list = list;

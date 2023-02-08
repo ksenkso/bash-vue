@@ -10,6 +10,9 @@
       <li>
         <router-link :to="{ name: 'RANDOM' }">Рандом</router-link>
       </li>
+      <li>
+        <router-link :to="{ name: 'YEAR', params: { year: 'first' } }">По годам</router-link>
+      </li>
     </ul>
   </nav>
 </template>
