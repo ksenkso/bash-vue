@@ -2,6 +2,12 @@
   <footer class="footer">
     <h3 class="title">Горячие клавиши</h3>
     <div class="shortcuts">
+      <div
+        v-if="isRandom"
+        class="shortcut"
+      >
+        <kbd>R</kbd> ➝ Новая случайная цитата
+      </div>
       <div class="shortcut">
         <kbd>ArrowRight</kbd> ➝ На страницу вперед
       </div>
@@ -23,6 +29,11 @@ import { defineComponent } from 'vue';
 
 export default defineComponent({
   name: 'footer-view',
+  computed: {
+    isRandom() {
+      return this.$route.name === 'RANDOM';
+    },
+  },
 });
 </script>
 
