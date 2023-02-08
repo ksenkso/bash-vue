@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <h3>Горячие клавиши</h3>
+    <h3 class="title">Горячие клавиши</h3>
     <div class="shortcuts">
       <div class="shortcut">
         <kbd>ArrowRight</kbd> ➝ На страницу вперед
@@ -27,6 +27,10 @@ export default defineComponent({
 </script>
 
 <style scoped>
+.title {
+  margin-top: 0;
+}
+
 .footer {
   padding: 24px;
   background-color: #404040;
@@ -38,5 +42,12 @@ export default defineComponent({
   display: flex;
   flex-direction: column;
   row-gap: 8px;
+}
+
+kbd {
+  padding: 4px;
+  border: 1px solid #313131;
+  border-radius: 4px;
+  background-color: #282828
 }
 </style>
