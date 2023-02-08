@@ -1,18 +1,21 @@
 <template>
-  <header class="header">
-    <menu-view />
-    <search-form />
-  </header>
+  <container-view>
+    <header class="header">
+      <menu-view/>
+      <search-form/>
+    </header>
+  </container-view>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import SearchForm from './search-form.vue';
 import MenuView from './menu-view.vue';
+import ContainerView from './container-view.vue';
 
 export default defineComponent({
   name: 'header-view',
-  components: { SearchForm, MenuView },
+  components: { ContainerView, SearchForm, MenuView },
 });
 </script>
 <style scoped>
@@ -21,7 +24,7 @@ export default defineComponent({
   justify-content: space-between;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 700px) {
   .header {
     flex-direction: column;
     justify-content: flex-start;
