@@ -30,9 +30,17 @@ ul {
   list-style-type: none;
   padding: 12px;
   display: flex;
-  column-gap: 16px;
+  gap: 16px;
   margin: 0;
   justify-content: center;
+}
+
+@media screen and (max-width: 400px) {
+  ul {
+    overflow: scroll;
+    margin: 0 -12px;
+    justify-content: flex-start;
+  }
 }
 
 a {
@@ -42,6 +50,7 @@ a {
   text-decoration: none;
   cursor: pointer;
   border-radius: 5px;
+  white-space: nowrap;
 }
 
 a.router-link-active {
